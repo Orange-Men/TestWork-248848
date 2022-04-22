@@ -1,16 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Filters\UsersFilter;
+use App\Traits\Filterable;
+use Illuminate\Database\Query\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * Class User
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'api_token',
     ];
 
     /**
@@ -41,4 +51,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function exams(): BelongsToMany
+    {
+        return $this->belongsToMany(Exam::class)
+            ->withPivot('grade');
+    }
+
+    /**
+     * @param Builder $builder
+     * @return Builder|QueryBuilder
+     */
+    public function scopeFilter(Builder $builder): Builder|QueryBuilder
+    {
+        return (new UsersFilter(request()))->apply($builder);
+    }
 }

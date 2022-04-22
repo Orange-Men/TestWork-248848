@@ -1,0 +1,159 @@
+{
+    "info": {
+        "_postman_id": "e0205ed1-286f-41d5-b0b2-a6e616146581",
+        "name": "test-work",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "register",
+            "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                    "accept": true
+                }
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "key": "name",
+                            "value": "test",
+                            "type": "text"
+                        },
+                        {
+                            "key": "email",
+                            "value": "test@test.com",
+                            "type": "text"
+                        },
+                        {
+                            "key": "password",
+                            "value": "test1234",
+                            "type": "text"
+                        },
+                        {
+                            "key": "password_confirmation",
+                            "value": "test1234",
+                            "type": "text"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{BASE_URL}}/api/register",
+                    "host": [
+                        "{{BASE_URL}}"
+                    ],
+                    "path": [
+                        "api",
+                        "register"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "users",
+            "protocolProfileBehavior": {
+                "disabledSystemHeaders": {
+                    "accept": true
+                }
+            },
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "{{TOKEN}}",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text",
+                        "disabled": true
+                    }
+                ],
+                "url": {
+                    "raw": "{{BASE_URL}}/api/v1/users?gradeLess=90&sortEmail=desc",
+                    "host": [
+                        "{{BASE_URL}}"
+                    ],
+                    "path": [
+                        "api",
+                        "v1",
+                        "users"
+                    ],
+                    "query": [
+                        {
+                            "key": "search",
+                            "value": "Prof",
+                            "disabled": true
+                        },
+                        {
+                            "key": "gradeMore",
+                            "value": "96",
+                            "disabled": true
+                        },
+                        {
+                            "key": "gradeLess",
+                            "value": "90"
+                        },
+                        {
+                            "key": "sortName",
+                            "value": "asc",
+                            "disabled": true
+                        },
+                        {
+                            "key": "sortEmail",
+                            "value": "desc"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "BASE_URL",
+            "value": "http://localhost"
+        },
+        {
+            "key": "TOKEN",
+            "value": "Bearer ZI60XZRCcsdWnMRZXJvlJS8Fdv25UiuHrXMd6ZR6GXkoRSLqfha90EG1PErz"
+        }
+    ]
+}
