@@ -6,6 +6,8 @@ namespace App\Service;
 
 use App\Repository\UserRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 /**
  * Class UserService
@@ -13,8 +15,21 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
  */
 class UserService
 {
+    /**
+     * UserService constructor.
+     * @param UserRepositoryInterface $userRepository
+     */
     public function __construct(private UserRepositoryInterface $userRepository)
     {
+    }
+
+    /**
+     * @param Request $request
+     * @return Model
+     */
+    public function create(Request $request): Model
+    {
+        return $this->userRepository->create($request);
     }
 
     /**
